@@ -30,7 +30,7 @@ public class Parser {
         addPatterns(mySyntax, myParameterProperties);
     }
 
-    public List<CommandNode> parse(String input) throws InvalidCommandException { // todo: throw invalidcommandexception and invalidnumberinputs exception
+    public List<CommandNode> parse(String input) throws InvalidCommandException {
         myCurrentCommand = input;
         List<CommandNode> topLevelCommands = new ArrayList<>();
         while(myCurrentCommand.length() > 0) {
