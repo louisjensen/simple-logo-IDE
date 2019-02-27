@@ -5,10 +5,10 @@ package main;
 import java.util.ArrayList;
 import java.util.List;
 
-import exceptions.InvalidCommandException;
-import nodes.CommandNode;
-import nodes.*;
-import nodes.VisualCommand;
+import back_end.exceptions.InvalidCommandException;
+import back_end.nodes.CommandNode;
+import back_end.nodes.VisualCommand;
+import back_end.Parser;
 import turtle.ImmutableTurtleState;
 
 public class CommandController {
@@ -24,7 +24,7 @@ public class CommandController {
         CommandNode myNode;
         myVisualCommands = new ArrayList<VisualCommand>();
         try{
-            myNode = myParser.parse(command).get(0); // note of change! This is changed now because their could be many commands in a list that come from a parser.
+            myNode = myParser.parse(command).get(0); // note of change! This is changed now because their could be many commands in a list that come from a back_end.parser.
         }
         catch(ArithmeticException e){
          return INVALID_COMMAND;
@@ -40,7 +40,7 @@ public class CommandController {
         }
         //pass list of visual commands to vis
         //would need to write
-        //for (nodes.VisualCommand c: myVisualCommands)
+        //for (back_end.nodes.VisualCommand c: myVisualCommands)
         // c.execute(myCanvas);
     }
     public List<VisualCommand> getMyVisualCommands(){

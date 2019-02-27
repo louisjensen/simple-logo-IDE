@@ -1,7 +1,5 @@
 package GUI;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -10,7 +8,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import nodes.VisualCommand;
+import back_end.nodes.VisualCommand;
 
 import java.util.ArrayList;
 import java.util.List;

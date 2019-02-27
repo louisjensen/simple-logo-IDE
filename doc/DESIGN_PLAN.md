@@ -3,7 +3,7 @@
 ## Introduction
 * We are trying to create an application where novice programmers can gain experience with programming in an intuitive manner.  The application should also give more experienced programmers the flexibility to create more sophisticated programs.  The program should be interactive and responsive enough to allow users to see the output of their commands immediately (REPL) and allow them to reuse and build off previous commands.
 * We want our code to be more flexible in adding new commands to the list of possible commands. In terms of UI, it should be easy to do things like change languages, add a new language, or change existing language. 
-* Closed: The way that the UI interacts with the commands. For example, adding in new commands should not change the way that the UI passes commands to the parser. Method functionality should all be in back-end, but UI code should not need to be changed. 
+* Closed: The way that the UI interacts with the commands. For example, adding in new commands should not change the way that the UI passes commands to the back_end.parser. Method functionality should all be in back-end, but UI code should not need to be changed. 
 * Open: New commands should be open to extension, the languages that our project uses, instructional information should be open, syntax handling (i.e. real-time code checking). User preferences should be easy to change
 
 
@@ -24,7 +24,7 @@
     * Executing the commands
     
 **General Steps:**
-* Use case for our design: The user types in a command to GUI.  The GUI sends the command to the parser.  The parser parses the command and tells the Model what to commands to execute.  The Model executes the command, updating the state of the back end.  The back end notifies the GUI that the command has been processed and is ready to be displayed.  The GUI asks the back end for the necessary information to update the display and updates the display.
+* Use case for our design: The user types in a command to GUI.  The GUI sends the command to the back_end.parser.  The back_end.parser parses the command and tells the Model what to commands to execute.  The Model executes the command, updating the state of the back end.  The back end notifies the GUI that the command has been processed and is ready to be displayed.  The GUI asks the back end for the necessary information to update the display and updates the display.
 
 **Classes:**
 * Front-End:
@@ -38,7 +38,7 @@
     * Command superclass
         * One class for every command
     * Parser uses different Commands
-        * Passes command handler a tree of nodes with commands/values
+        * Passes command handler a tree of back_end.nodes with commands/values
     * Turtle - keeps track of turtle’s location and possibly drawings
         * Locations kept as doubles
         
@@ -60,8 +60,8 @@
         * Its intended use it to select from multiple different languages to fulfill the requirement in the Basic implementation
         * This could be extended by adding in more properties files and adding to the dropdown list
     * displayError()
-        * Triggered by exceptions being thrown to external methods. 
-        * Its intended purpose is to make sure that the project never crashes, and instead handles exceptions as they happen and alerts the User that they have done something incorrectly
+        * Triggered by back_end.exceptions being thrown to external methods. 
+        * Its intended purpose is to make sure that the project never crashes, and instead handles back_end.exceptions as they happen and alerts the User that they have done something incorrectly
         * This could be extended by throwing different kinds of errors
     * displayHelpPage()
         * This is a method called when the user clicks on the help page tab. 
@@ -103,7 +103,7 @@
         * This traverses through the command tree and calls evaluateCommand() on every command in the tree. 
         * This also satisfies having commands and can be extended by adding in new types or a number of parameters
     * getCommandTree()
-        * This is a method that the parser has that allows for the controller to see all of the commands registered by the parser. 
+        * This is a method that the back_end.parser has that allows for the controller to see all of the commands registered by the back_end.parser. 
         * This satisfies having commands
         * saveUserDefinedCommand()
         * When a user defines a command, stores it so that it can be called again. 
@@ -166,7 +166,7 @@
     * Set the background color of the turtle’s canvas to the instance variable myBackgroundColor
 * Louis Use Case 2: User types in a command and presses run
     * Store the text that the user enters as a String
-    * Send the String to the parser
+    * Send the String to the back_end.parser
     * Update the GUI to display the new positioning and potential lines drawn by the turtle
 * Ryan Use Case 1: User changes clicks on clear to clear the screen
     * Remove the text from the command prompt reverting back to the default text
@@ -199,8 +199,8 @@
 ## Example Code
 * Individual Responsibilities
     * Louis: Front-end: External API
-        * Handle communication from front-end to parser
-        * Catch and display the exceptions/error messages received from back-end when trying to run a user command
+        * Handle communication from front-end to back_end.parser
+        * Catch and display the back_end.exceptions/error messages received from back-end when trying to run a user command
         * Handle the display updates received from the back-end
     * Ryan: Front-end: Internal API
         * Create the GUI components

@@ -13,9 +13,9 @@ Louis Jensen (lbj7), Ian Hanus (ih52)
 
     * Louis: We plan to create a class for each individual item that will appear on the screen and use one GUI class to add them all to the screen.
 
-3. What exceptions (error cases) might occur in your part and how will you handle them (or not, by throwing)?
+3. What back_end.exceptions (error cases) might occur in your part and how will you handle them (or not, by throwing)?
 
-    * Ian: Exceptions that we will be accounting for have to do with file choice for the turtle image and invalid command exceptions. These will be returned by our popup error display to the user.
+    * Ian: Exceptions that we will be accounting for have to do with file choice for the turtle image and invalid command back_end.exceptions. These will be returned by our popup error display to the user.
 
     * Louis: Make sure that a command the user enters that returns an error is not added to the list of past commands, so they can not click on it to use again. 
 

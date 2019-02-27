@@ -1,6 +1,6 @@
 package GUI;
 
-import apis.CanvasAPI;
+import back_end.apis.CanvasAPI;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;

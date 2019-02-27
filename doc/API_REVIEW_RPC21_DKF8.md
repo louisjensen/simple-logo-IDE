@@ -4,13 +4,13 @@ Part 1
 Dima
 1. Our API will allow for multiple turtles to be controlled separately on the screen. Currently, our API is designed specifically for turtles and the proprties position, heading, and color.
 2. The turtle sprite on the front end is not passed any information from a command except information that is required graphically (Movement, heading, color). Nothing about how the commands are run or are parsed is known to the front end or the turtle sprite. 
-3. Parsing exceptions will print instructions and feedback to the user via the command log. Command executing exceptions that have to do with invalid arguments or missin information will also through exceptions by printing detailed feedback to the user to the command log. This we felt is a good way to communicate exceptions that require user activity, and is similar to what happens in terminal. 
+3. Parsing back_end.exceptions will print instructions and feedback to the user via the command log. Command executing back_end.exceptions that have to do with invalid arguments or missin information will also through back_end.exceptions by printing detailed feedback to the user to the command log. This we felt is a good way to communicate back_end.exceptions that require user activity, and is similar to what happens in terminal. 
 4. We think that our current API is good because it is able to handle all the use cases that we've run through and thought out. The use cases in our design plan cover most of the commands and features we have considered implementing in our project.
 
 Ryan
 1. Our flexibility mostly comes from our updateDisplay method that will iterate through a list of unmodifiable displayable objects passed from the backend to update the display of the front end.
 2. The details about parsing, commands, syntax errors, etc. are completely unknown by the front end.  Unfortunately, many front end components are known by the back end due to our implementation decision of using property binding to communicate between back end and front end.
-3. We will handle exceptions thrown by the parser to communicate to user about the different errors in their command.
+3. We will handle back_end.exceptions thrown by the back_end.parser to communicate to user about the different errors in their command.
 4. Our API design is good because the front end external API is very small (ony one method) which indicates that there is not a lot of dependency between the back end and front end.
 
 Part 2

@@ -38,7 +38,7 @@ Megan Phibbons, Anna Darwish, Louis Jensen, Ryan Culhane
     * currLocation
     * fileName
 * Interactions
-    * main.Parser gives information to the Turtle of what to do 
+    * back_end.parser.Parser gives information to the Turtle of what to do 
     * Sends information to UI about location and whether or not drawing
 ####Class 2: ValidWord  
 * Methods
@@ -65,29 +65,29 @@ Megan Phibbons, Anna Darwish, Louis Jensen, Ryan Culhane
     * Help screen
     * Color changes
 * **Front-End External**
-    * Send commands to the parser
+    * Send commands to the back_end.parser
 * **Back-End Internal**
-    * Receiving the commands from the parser
+    * Receiving the commands from the back_end.parser
     * Evaluating commands
 * **Back-End External**
     * Send results to the UI
 
 ## Use Cases
 * The user types 'fd 50' in the command window, sees the turtle move in the display window leaving a trail, and has the command added to the environment's history.
-    * Send the command to the parser
-    * main.Parser checks command to see if it's valid
+    * Send the command to the back_end.parser
+    * back_end.parser.Parser checks command to see if it's valid
     * Turtle class executes command and sends info back to UI
     * UI gets info from the turtle and updates display
     * UI adds command to Command History tab
 * The user types '50 fd' in the command window and sees an error message that the command was not formatted correctly.
     * The UI reads in the command
-    * The UI sends the command to the main.Parser
-    * The main.Parser sees that the command is invalid, throws an exception
+    * The UI sends the command to the back_end.parser.Parser
+    * The back_end.parser.Parser sees that the command is invalid, throws an exception
     * The UI sees that there's an exception and displays an invalid command error to the user
 * The user types 'pu fd 50 pd fd 50' in the command window and sees the turtle move twice (once without a trail and once with a trail).
     * The UI reads in the commands
-    * The  UI sends the commands to the main.Parser
-    * The parser tells the turtle the commands
+    * The  UI sends the commands to the back_end.parser.Parser
+    * The back_end.parser tells the turtle the commands
     * the turtle sets its according pen state
     * The turtle moves
     * the turtle updates its pen state
