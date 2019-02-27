@@ -1,5 +1,7 @@
 package nodes;
 
+import apis.CanvasAPI;
+
 public class VisualTurtleForward extends VisualCommand {
     private double myPixels;
     public VisualTurtleForward(double pixels){

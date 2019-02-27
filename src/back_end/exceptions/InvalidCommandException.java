@@ -1,4 +1,4 @@
-package back_end.exceptions;
+package exceptions;
 
 public class InvalidCommandException extends Exception {
     public InvalidCommandException(String reason) {

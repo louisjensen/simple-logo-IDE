@@ -1,5 +1,10 @@
 package parser;
 
+import exceptions.InvalidCommandException;
+import nodes.AddVariable;
+import nodes.CommandFactory;
+import nodes.CommandNode;
+
 import java.util.AbstractMap.SimpleEntry;
 import java.util.*;
 import java.util.Map.Entry;
@@ -23,6 +28,7 @@ public class Parser {
             addVariable(s,d);
         }
     };
+
     public Parser() {
         myCommandFactory = new CommandFactory();
         myParameterProperties = ResourceBundle.getBundle(PARAMETER_PROPERTIES_LOCATION);
