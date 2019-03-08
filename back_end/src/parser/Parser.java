@@ -15,7 +15,6 @@ public class Parser {
     private Validator myValidator;
 
     private static final String LIST_NODE_NAME = "ListNode";
-    private static final String VARIABLE_NODE_NAME = "Variable";
 
     public Parser(UserCreated userCreated) {
         myUserCreated = userCreated;
