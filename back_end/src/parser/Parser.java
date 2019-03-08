@@ -76,11 +76,7 @@ public class Parser {
     }
 
     private CommandNode makeNameListTree() throws InvalidInputException {
-        if(myValidator.hasListEnd(myCurrentCommand)) {
-            throw new InvalidListException();
-        }
-        CommandNode parent = myCommandFactory.makeCommand(LIST_NODE_NAME, myUserCreated);
-        updateMyCurrentCommand();
+        CommandNode parent = makeHeadOfList();
         String[] splitCommand = myCurrentCommand.trim().split("\\s+");
         String child = splitCommand[0];
         while(!myValidator.isListEnd(child)) {
@@ -89,6 +85,14 @@ public class Parser {
             child = splitCommand[0];
         }
         return parent;
+    }
+
+    private CommandNode makeHeadOfList() throws InvalidInputException {
+        if(myValidator.hasListEnd(myCurrentCommand)) {
+            throw new InvalidListException();
+        }
+        updateMyCurrentCommand();
+        return myCommandFactory.makeCommand(LIST_NODE_NAME, myUserCreated);
     }
 
     private CommandNode makeListNode(List<CommandNode> commands) throws InvalidInputException {
@@ -133,11 +137,7 @@ public class Parser {
     }
 
     private CommandNode makeListTree() throws InvalidInputException {
-        if(myValidator.hasListEnd(myCurrentCommand)) {
-            throw new InvalidListException();
-        }
-        CommandNode parent = myCommandFactory.makeCommand(LIST_NODE_NAME, myUserCreated);
-        updateMyCurrentCommand();
+        CommandNode parent = makeHeadOfList();
         String[] splitCommand = myCurrentCommand.trim().split("\\s+");
         String child = splitCommand[0];
         while(!myValidator.isListEnd(child)) {
@@ -155,7 +155,6 @@ public class Parser {
             myCurrentCommand += split[i] + " ";
         }
         myCurrentCommand = myCurrentCommand.trim();
-
     }
 
     public void updateLanguage(String newLanguage) {
