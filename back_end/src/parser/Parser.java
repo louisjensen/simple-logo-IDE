@@ -11,6 +11,7 @@ import java.util.List;
 public class Parser {
     private CommandFactory myCommandFactory;
     private String myCurrentCommand;
+    private String[] mySplitCommand;
     private UserCreated myUserCreated;
     private Validator myValidator;
 
@@ -25,6 +26,7 @@ public class Parser {
     public List<CommandNode> parse(String input) throws InvalidInputException {
         myCurrentCommand = input;
         myCurrentCommand = myValidator.removeComments(input);
+        mySplitCommand = splitUpCurrentCommand();
         List<CommandNode> topLevelCommands = new ArrayList<>();
         while(myCurrentCommand.length() > 0) {
             topLevelCommands.add(makeNodeTree());
@@ -32,28 +34,16 @@ public class Parser {
         return topLevelCommands;
     }
 
-    private CommandNode makeNodeTree() throws InvalidInputException { // todo: check for invalid number of inputs?
+    private String[] splitUpCurrentCommand() {
+        return myCurrentCommand.split("\\s+"); // todo: replace this with props file
+    }
+
+    private CommandNode makeNodeTree() throws InvalidInputException {
         String[] commandSplit = myCurrentCommand.trim().split("\\s+");
         String currentValue = commandSplit[0];
-        String currentCommandKey;
-        CommandNode currentNode;
-        int expectedNumberOfParameters;
-        try {
-            currentCommandKey = myValidator.getCommandKey(currentValue);
-            currentNode = myCommandFactory.makeCommand(currentCommandKey, myUserCreated);
-            expectedNumberOfParameters = myValidator.getExpectedNumberOfParameters(currentCommandKey);
-            updateMyCurrentCommand();
-        } catch (InvalidInputException e) {
-            if(myUserCreated.containsCommand(currentValue)) {
-                currentNode = myCommandFactory.makeCommand("UserInstruction", myUserCreated);
-                addNameChild(currentNode, currentValue);
-                currentNode.addChild(makeListTree());
-                currentNode.addChild(makeListNode(parse(myUserCreated.getCommand(currentValue))));
-                return currentNode;
-            } else {
-                throw e;
-            }
-        }
+        String currentCommandKey = myValidator.getCommandKey(currentValue,  myUserCreated);
+        CommandNode currentNode = makeGeneralCommand(currentCommandKey);
+        int expectedNumberOfParameters = myValidator.getExpectedNumberOfParameters(currentValue);
         if(currentNode.needsName()) { // this means the current node is looking for a variable
             addNameChild(currentNode, commandSplit[1]);
         }
@@ -71,6 +61,20 @@ public class Parser {
                 throw new TooFewInputsException();
             }
             addChild(currentNode, commandSplit[0]);
+        }
+        return currentNode;
+    }
+
+    private  CommandNode makeGeneralCommand(String command) throws InvalidInputException {
+        CommandNode currentNode;
+        if(myUserCreated.containsCommand(command)) {
+            currentNode = myCommandFactory.makeCommand("UserInstruction", myUserCreated);
+            addNameChild(currentNode, command);
+            currentNode.addChild(makeListTree());
+            currentNode.addChild(makeListNodeFromList(parse(myUserCreated.getCommand(command))));
+        } else {
+            currentNode = myCommandFactory.makeCommand(command, myUserCreated);
+            updateMyCurrentCommand();
         }
         return currentNode;
     }
@@ -95,7 +99,7 @@ public class Parser {
         return myCommandFactory.makeCommand(LIST_NODE_NAME, myUserCreated);
     }
 
-    private CommandNode makeListNode(List<CommandNode> commands) throws InvalidInputException {
+    private CommandNode makeListNodeFromList(List<CommandNode> commands) throws InvalidInputException {
         CommandNode head = myCommandFactory.makeCommand(LIST_NODE_NAME, myUserCreated);
         for(CommandNode command : commands) {
             head.addChild(command);
@@ -104,7 +108,6 @@ public class Parser {
     }
 
     private void addNameChild(CommandNode currentNode, String s) {
-        // todo: figure out how to validate name for variable (but not method)
         currentNode.addChild(myCommandFactory.makeNameNode(s));
         updateMyCurrentCommand();
     }

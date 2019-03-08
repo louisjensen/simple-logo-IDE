@@ -64,7 +64,10 @@ public class Validator {
         return String.join(" ", lines).trim();
     }
 
-    public String getCommandKey(String input) throws InvalidInputException {
+    public String getCommandKey(String input, UserCreated userCreated) throws InvalidInputException {
+        if(userCreated.containsCommand(input)) {
+            return input;
+        }
         for(var key : myCommandSyntax.keySet()) {
             if(match(myCommandSyntax, input, key)) {
                 return key;
@@ -73,7 +76,7 @@ public class Validator {
         throw new InvalidCommandException(input);
     }
 
-    // purpose: check if something successfully can be parsed as a double
+    // todo: use regex
     public boolean isDouble(String input) {
         try {
             Double.parseDouble(input);
@@ -90,6 +93,9 @@ public class Validator {
     }
 
     public int getExpectedNumberOfParameters(String currentCommandKey) {
+        if(!myParameterProperties.containsKey(currentCommandKey)) {
+            return -1; // at this point, this will only be true for user defined commands (exceptions thrown elsewhere)
+        }
         return Integer.parseInt(myParameterProperties.getString(currentCommandKey).trim());
     }
 
