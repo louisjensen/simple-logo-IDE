@@ -8,6 +8,7 @@ import nodes.CommandNode;
 import java.util.ArrayList;
 import java.util.List;
 
+//  todo:  actually use  mySplitCommand
 public class Parser {
     private CommandFactory myCommandFactory;
     private String myCurrentCommand;
@@ -44,24 +45,28 @@ public class Parser {
         String currentCommandKey = myValidator.getCommandKey(currentValue,  myUserCreated);
         CommandNode currentNode = makeGeneralCommand(currentCommandKey);
         int expectedNumberOfParameters = myValidator.getExpectedNumberOfParameters(currentValue);
-        if(currentNode.needsName()) { // this means the current node is looking for a variable
+        if(currentNode.needsName()) { // this means the current node is looking for a variable or method name
             addNameChild(currentNode, commandSplit[1]);
         }
         if(currentNode.isMethodDeclaration()) { // special case where we want the children to be a bit different
-            addNameChild(currentNode,  commandSplit[1]);
-            currentNode.addChild(makeNameListTree());
-            updateMyCurrentCommand();
-            currentNode.addChild(myCommandFactory.makeNameNode(myCurrentCommand.substring(myCurrentCommand.indexOf("[") + 1, myCurrentCommand.indexOf("]"))));
-            myCurrentCommand = "";
-            return currentNode;
+            return makeMethodDeclarationNode(currentNode, commandSplit[1]);
         }
         for(int i = getStartIndex(currentNode); i <= expectedNumberOfParameters; i++) {
             commandSplit = myCurrentCommand.split("\\s+");
             if(commandSplit[0].length()  == 0) {
-                throw new TooFewInputsException();
+                throw new TooFewInputsException();  // this takes care of the issue where it  tries to parse an empty string
             }
             addChild(currentNode, commandSplit[0]);
         }
+        return currentNode;
+    }
+
+    private CommandNode makeMethodDeclarationNode(CommandNode currentNode, String command) throws InvalidInputException {
+        addNameChild(currentNode, command);
+        currentNode.addChild(makeNameListTree());
+        updateMyCurrentCommand();
+        currentNode.addChild(myCommandFactory.makeNameNode(myCurrentCommand.substring(myCurrentCommand.indexOf("[") + 1, myCurrentCommand.indexOf("]"))));
+        myCurrentCommand = "";
         return currentNode;
     }
 
