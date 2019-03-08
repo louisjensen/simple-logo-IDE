@@ -46,11 +46,9 @@ public class Parser {
             updateMyCurrentCommand();
         } catch (InvalidInputException e) {
             if(myUserCreated.containsCommand(currentValue)) {
-                System.out.println("RUNNING USER COMMAND");
                 currentNode = myCommandFactory.makeCommand("UserInstruction", myUserCreated);
                 addNameChild(currentNode, currentValue);
                 currentNode.addChild(makeListTree());
-                System.out.println(myUserCreated.getCommand(currentValue));
                 currentNode.addChild(makeListNode(parse(myUserCreated.getCommand(currentValue))));
                 return currentNode;
             } else {
@@ -127,7 +125,6 @@ public class Parser {
         } else if (myValidator.isListStart(child)) {
             currentNode.addChild(makeListTree());
         } else if (myValidator.isVariable(child)) {
-            System.out.println("We're tyring here...");
             addVariableChild(currentNode, child);
         } else {
             currentNode.addChild(makeNodeTree());

@@ -24,7 +24,6 @@ public class UserInstruction extends CommandNode {
         CommandNode listOfVariableValues = super.getChildren().get(1);
         List<Double> myVariableValues = new ArrayList<>();
         for (CommandNode c: listOfVariableValues.getChildren()) {
-            System.out.println("Evaluating: " + c);
             myVariableValues.add(c.evaluate(myVisCommands, myTurtles));
         }
 
