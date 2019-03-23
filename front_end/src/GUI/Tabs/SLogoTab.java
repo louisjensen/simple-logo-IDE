@@ -20,14 +20,6 @@ public class SLogoTab extends BasicTab {
     public SLogoTab(){
         super();
     }
-//
-//    /**
-//     * Constructor that sets the title of the tab
-//     * @param tabTitle Tab title
-//     */
-//    public SLogoTab(String tabTitle){
-//        super(tabTitle);
-//    }
 
     /**
      * Constructor that sets Title of tab and allows tab to pass info to command line
@@ -38,13 +30,6 @@ public class SLogoTab extends BasicTab {
         super(tabTitle);
         guiData = data;
     }
-
-//    private void initializeScrollPane() {
-//        myVBoxOfStrings = new VBox();
-//        myScrollPane = new ScrollPane();
-//        myScrollPane.setContent(myVBoxOfStrings);
-//        myScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-//    }
 
     /**
      * Adds a new item to tab
@@ -59,12 +44,5 @@ public class SLogoTab extends BasicTab {
         });
         myVBoxOfStrings.getChildren().add(0, contents);
     }
-
-//    /**
-//     * Removes all contents from tab
-//     */
-//    public void clearContents(){
-//        myVBoxOfStrings.getChildren().clear();
-//    }
 
 }
