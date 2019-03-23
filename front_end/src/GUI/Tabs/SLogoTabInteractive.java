@@ -51,7 +51,7 @@ public abstract class SLogoTabInteractive extends SLogoTab {
         myVBoxOfStrings.getChildren().add(0, content);
     }
 
-    private Diit alog displayDialogMenu(Label contents, String title, String contentText) {
+    private Dialog displayDialogMenu(Label contents, String title, String contentText) {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setHeaderText(contents.getText());
         dialog.setTitle(title);
