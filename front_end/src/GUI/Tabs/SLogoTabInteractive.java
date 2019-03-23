@@ -52,14 +52,19 @@ public abstract class SLogoTabInteractive extends SLogoTab {
     }
 
     private Dialog displayDialogMenu(Label contents, String title, String contentText) {
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setHeaderText(contents.getText());
-        dialog.setTitle(title);
-        dialog.setContentText(contentText);
+        Dialog dialog = makeDialog(contents, title, contentText);
         Optional<String> result = dialog.showAndWait();
         result.ifPresent(value -> {
            runCommand(convertResultToRunnableString(contents, value));
         });
+        return dialog;
+    }
+    
+    private Dialog makeDialog(Label contents, String title, String contentText){
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setHeaderText(contents.getText());
+        dialog.setTitle(title);
+        dialog.setContentText(contentText);
         return dialog;
     }
 
