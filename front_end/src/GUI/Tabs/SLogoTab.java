@@ -37,12 +37,17 @@ public class SLogoTab extends BasicTab {
      */
     @Override
     public void addContents(String newContents){
+        Label content = newLabel(newContents);
+        content.setOnMouseClicked(event -> {
+            guiData.setMyTextToUpdate(content.getText());
+        });
+        myVBoxOfStrings.getChildren().add(0, content);
+    }
+
+    protected Label newLabel(String newContents){
         Label contents = new Label(newContents);
         contents.setWrapText(true);
-        contents.setOnMouseClicked(event -> {
-            guiData.setMyTextToUpdate(contents.getText());
-        });
-        myVBoxOfStrings.getChildren().add(0, contents);
+        return contents;
     }
 
 }

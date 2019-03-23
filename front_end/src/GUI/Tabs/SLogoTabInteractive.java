@@ -44,15 +44,14 @@ public abstract class SLogoTabInteractive extends SLogoTab {
     public void addContents(String newContents) {
         String[] nameAndValue = newContents.split(" ");
         isItAlreadyThere(nameAndValue[0]);
-        Label contents = new Label(newContents);
-        contents.setWrapText(true);
-        contents.setOnMouseClicked(event -> {
-            displayDialogMenu(contents, myTitle, myContents);
+        Label content = super.newLabel(newContents);
+        content.setOnMouseClicked(event -> {
+            displayDialogMenu(content, myTitle, myContents);
         });
-        myVBoxOfStrings.getChildren().add(0, contents);
+        myVBoxOfStrings.getChildren().add(0, content);
     }
 
-    private Dialog displayDialogMenu(Label contents, String title, String contentText) {
+    private Diit alog displayDialogMenu(Label contents, String title, String contentText) {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setHeaderText(contents.getText());
         dialog.setTitle(title);
