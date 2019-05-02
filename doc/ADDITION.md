@@ -7,13 +7,13 @@ Louis Jensen (lbj7)
 ### Estimation
 
  * How long do you think it will take you to complete this new feature?
- * * I plan to add the feature that will allow users
+   * I plan to add the feature that will allow users
  to click on a turtle to change its image and I believe that 
  it will take me about an hour.
 
 
  * How many files will you need to add or update? Why?
- * * I think I will need to add one file for the turtle
+   * I think I will need to add one file for the turtle
  selection context menu and modify the currently existing 
  turtle context menu.
 
